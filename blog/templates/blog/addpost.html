@@ -1,0 +1,25 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="col-sm-10">
+  <h3 class="my-5">Dashboard/ Add Post</h3>
+
+  <form action="" method="post">
+    {% csrf_token %}
+    {% for fm in form %}
+    {% csrf_token %}
+      <div class="form-group">
+        {{fm.label_tag}}  {{fm}} <small class="text-warning">{{fm.errors|striptags}}</small>
+      </div>
+    {% endfor %}
+    <input type="submit" class="btn" value="Add">
+    <a href="{% url 'Dashboard' %}" class="btn" style="background-color:red; color:white; padding:12px 20px; border:none; border-radius:4px; cursor: pointer;">Cancel</a>
+    {% if form.non_field_errors %}
+      {% for error in form.non_field_errors %}
+        <p class="alert alert-danger my-3">{{error}}</p>
+      {% endfor %}
+    {% endif %}
+  </form>
+</div>
+{% endblock content %}
